@@ -216,6 +216,10 @@ wikibase.queryService.ui.resultBrowser.helper.FormatterHelper = ( function( $, m
 	 * @return {boolean}
 	 */
 	SELF.prototype.isEntityUri = function( uri ) {
+		try{
+			return (wikibase.queryService.RdfNamespaces.ENTITY_TYPES[uri.match(/(.*)\/[QP]/)[0]] === null) ? false : true;
+		}
+		catch(e) {}
 		return typeof uri === 'string'
 			&& /^https?:\/\/www\.wikidata\.org\/entity\/./.test( uri );
 	};
